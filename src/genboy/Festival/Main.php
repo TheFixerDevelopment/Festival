@@ -1282,9 +1282,6 @@ class Main extends PluginBase implements Listener{
             $player->setFlying(false);
             $player->sendMessage(  TextFormat::RED . "§cNO Flying here!" );
         }
-        if( $fly && !$player->isFlying() && !$player->getAllowFlight() ){
-            $player->sendMessage( TextFormat::GREEN . "§5Flying allowed here!" );
-        }
         $player->setAllowFlight($fly);
         return $fly;
     }
