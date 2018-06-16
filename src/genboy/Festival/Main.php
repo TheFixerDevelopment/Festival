@@ -1273,18 +1273,7 @@ class Main extends PluginBase implements Listener{
                 }
             }
         }
-        if( $player->hasPermission("area.fly.bypass" )){
-            $fly = true; // People with the permissions area.fly.bypass can fly
-        }
-        $msg = '';
-        if( !$fly && $player->isFlying() ){
-            $this->playerTP[ strtolower( $player->getName() ) ] = true; // player tp active (fall save)
-            $player->setFlying(false);
-            $player->sendMessage(  TextFormat::RED . "§cNO Flying here!" );
-        }
-        $player->setAllowFlight($fly);
-        return $fly;
-    }
+	}
 	/** On player move ..
 	 * @param PlayerMoveEvent $ev
 	 * @var string inArea
