@@ -1021,6 +1021,7 @@ class Main extends PluginBase implements Listener{
                 return false;
 			}
 	 }
+	}
 	/** Edit
 	 * @param Player   $player
 	 * @param Position $position
