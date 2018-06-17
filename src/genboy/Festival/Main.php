@@ -1020,8 +1020,10 @@ class Main extends PluginBase implements Listener{
 				$ev->setCancelled();
                 return false;
 			}
+		  }
 	  }
 	}
+			
 	/** Edit
 	 * @param Player   $player
 	 * @param Position $position
