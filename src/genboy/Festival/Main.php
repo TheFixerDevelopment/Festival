@@ -943,17 +943,17 @@ class Main extends PluginBase implements Listener{
 	 */
 	public function canPVP(EntityDamageEvent $ev) : bool{
         $o = true;
-        $god = false;
+        $pvp = false;
         if($ev instanceof EntityDamageByEntityEvent){
             if($ev->getEntity() instanceof Player && $ev->getDamager() instanceof Player){
                 $entity = $ev->getEntity();
-                $default = (isset($this->levels[$entity->getLevel()->getName()]) ? $this->levels[$entity->getLevel()->getName()]["PVP"] : $this->pvp);
+                $default = (isset($this->levels[$entity->getLevel()->getName()]) ? $this->levels[$entity->getLevel()->getName()]["PvP"] : $this->pvp);
                 if($default){
                     $o = false;
                 }
                 foreach($this->areas as $area){
                     if($area->contains(new Vector3($entity->getX(), $entity->getY(), $entity->getZ()), $entity->getLevel()->getName())){
-                        $god = $area->getFlag("god");
+                        $pvp = $area->getFlag("pvp");
                         if($default && !$area->getFlag("pvp")){
                             $o = true;
                             break;
@@ -987,10 +987,6 @@ class Main extends PluginBase implements Listener{
 			$player = $ev->getEntity();
 			$playerName = strtolower($player->getName());
 			if(!$this->canGetHurt($player)){
-				$ev->setCancelled();
-                return false;
-			}
-            if(!$this->canPVP($ev)){ // v 1.0.6-13
 				$ev->setCancelled();
                 return false;
 			}
