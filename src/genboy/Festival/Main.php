@@ -990,10 +990,6 @@ class Main extends PluginBase implements Listener{
 				$ev->setCancelled();
                 return false;
 			}
-			if(!$this->canPVP($player)){
-				$ev->setCancelled();
-				return false;
-			}
 			if( isset($this->playerTP[$playerName]) && $this->playerTP[$playerName] == true ){
 				unset( $this->playerTP[$playerName] ); //$this->areaMessage( 'Fall save off', $player );
 				$ev->setCancelled();
@@ -1016,6 +1012,15 @@ class Main extends PluginBase implements Listener{
 	public function onDamage(EntityDamageEvent $event) : void{
 		$this->canDamage( $event );
 	}
+	public function onPvP(EntityDamageEvent $event){
+	 if($ev->getEntity() instanceof Player){
+			$player = $ev->getEntity();
+			$playerName = strtolower($player->getName());
+			if(!$this->canPVP($player)){
+				$ev->setCancelled();
+                return false;
+			}
+	 }
 	/** Edit
 	 * @param Player   $player
 	 * @param Position $position
