@@ -947,7 +947,7 @@ class Main extends PluginBase implements Listener{
         if($ev instanceof EntityDamageByEntityEvent){
             if($ev->getEntity() instanceof Player && $ev->getDamager() instanceof Player){
                 $entity = $ev->getEntity();
-                $default = (isset($this->levels[$entity->getLevel()->getName()]) ? $this->levels[$entity->getLevel()->getName()]["PvP"] : $this->pvp);
+                $default = (isset($this->levels[$entity->getLevel()->getName()]) ? $this->levels[$entity->getLevel()->getName()]["PVP"] : $this->pvp);
                 if($default){
                     $o = false;
                 }
@@ -969,8 +969,8 @@ class Main extends PluginBase implements Listener{
         if( !$o ){
             $player = $ev->getDamager();
             if( $this->skippTime( 2, strtolower($player->getName()) ) ){
-                if( $god ){
-                    $this->areaMessage( '§5All players are God in this Area!', $player );
+                if( $pvp ){
+                    $this->areaMessage( '§5PvP is disabled in this area.', $player );
                 }else{
                     $this->areaMessage( '§cYou are in a No-PVP Area!', $player );
                 }
@@ -989,6 +989,10 @@ class Main extends PluginBase implements Listener{
 			if(!$this->canGetHurt($player)){
 				$ev->setCancelled();
                 return false;
+			}
+			if(!$this->canPVP($player)){
+				$ev->setCancelled();
+				return false;
 			}
 			if( isset($this->playerTP[$playerName]) && $this->playerTP[$playerName] == true ){
 				unset( $this->playerTP[$playerName] ); //$this->areaMessage( 'Fall save off', $player );
