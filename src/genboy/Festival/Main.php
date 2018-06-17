@@ -1013,11 +1013,11 @@ class Main extends PluginBase implements Listener{
 		$this->canDamage( $event );
 	}
 	public function onPvP(EntityDamageEvent $event){
-	 if($ev->getEntity() instanceof Player){
-			$player = $ev->getEntity();
+	 if($event->getEntity() instanceof Player){
+			$player = $event->getEntity();
 			$playerName = strtolower($player->getName());
 			if(!$this->canPVP($player)){
-				$ev->setCancelled();
+				$event->setCancelled();
                 return false;
 			}
 	 }
